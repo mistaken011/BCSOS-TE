@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCSO Online — Blaine County Sheriff's Office</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-brand">
+    <div class="nav-logo">BCSO</div>
+    <div>
+      <div class="nav-name">BCSO ONLINE</div>
+      <div class="nav-sub">Blaine County Sheriff's Office</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('home', this)">Hakkımızda</button>
+    <button class="nav-btn" onclick="showPage('hq', this)">BCSO HQ</button>
+    <button class="nav-btn" onclick="showPage('roster', this)">Personeller</button>
+    <button class="nav-btn" onclick="showPage('gallery', this)">Galeri</button>
+    <div class="dropdown">
+      <button class="nav-btn" id="formBtn">Formlar ▾</button>
+      <div class="dropdown-menu">
+        <div class="dropdown-item" onclick="selectForm('apply'); showPage('forms', document.getElementById('formBtn'))">
+          <div class="d-icon" style="background:rgba(200,146,42,0.15)">📋</div>Başvuru Formu
+        </div>
+        <div class="dropdown-item" onclick="selectForm('praise'); showPage('forms', document.getElementById('formBtn'))">
+          <div class="d-icon" style="background:rgba(100,170,90,0.15)">✔</div>Övgü Formu
+        </div>
+        <div class="dropdown-item" onclick="selectForm('complaint'); showPage('forms', document.getElementById('formBtn'))">
+          <div class="d-icon" style="background:rgba(200,70,70,0.15)">⚠</div>Şikayet Formu
+        </div>
+        <div class="dropdown-item" onclick="selectForm('ticket'); showPage('forms', document.getElementById('formBtn'))">
+          <div class="d-icon" style="background:rgba(74,144,204,0.15)">🎫</div>Destek Talebi
+        </div>
+      </div>
+    </div>
+    <button class="nav-btn" onclick="showPage('rules', this)">Yönetmelik</button>
+    <button class="nav-pill" onclick="openPanel()">Personel Paneli</button>
+  </div>
+</nav>
+
+<div id="main-site">
+
+  <!-- ============ ANASAYFA ============ -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-tag"><div class="hero-dot"></div>Kuruluş 2019 — FiveM Roleplay</div>
+        <div class="hero-logo-big">BCSO</div>
+        <h1>BLAINE COUNTY <span>SHERIFF'S</span><br>OFFICE</h1>
+        <div class="hero-line"></div>
+        <p class="hero-desc">FiveM topluluğundaki kolluk kuvvetleri simülasyonunun lider sağlayıcısı olarak profesyonel rol yapma, gerçekçilik ve toplum hizmetine kendimizi adadık.</p>
+        <div class="hero-stats">
+          <div><span class="hstat-num">52</span><span class="hstat-label">Aktif Personel</span></div>
+          <div><span class="hstat-num">6</span><span class="hstat-label">Birim</span></div>
+          <div><span class="hstat-num">4.1K+</span><span class="hstat-label">Tamamlanan Görev</span></div>
+        </div>
+        <div class="hero-btns">
+          <button class="btn-gold" onclick="selectForm('apply'); showPage('forms', document.getElementById('formBtn'))">Şimdi Başvur →</button>
+          <button class="btn-ghost" onclick="showPage('roster', document.querySelectorAll('.nav-btn')[2])">Personelleri İncele</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="inner">
+      <div class="about-grid">
+        <div>
+          <div class="sec-tag">Hakkımızda</div>
+          <div class="sec-title">LOS SANTOS'U <span>KORUMAK</span> VE HİZMET ETMEK</div>
+          <p class="about-text">Blaine County Sheriff's Office, FiveM topluluğundaki en köklü kolluk kuvvetlerinden biridir. Gerçekçi prosedürler, organize komuta yapısı ve aktif kadrosuyla öne çıkarız.</p>
+          <p class="about-text">Dürüstlük, departman kültürümüzün temeli ve kamu güveninin esasıdır.</p>
+        </div>
+        <div>
+          <div class="about-feat">
+            <div class="feat-card"><div class="feat-icon">🛡️</div><div class="feat-title">KORU VE HİZMET ET</div><div class="feat-desc">Birincil amacımız güvenlik ve düzeni sağlamaktır.</div></div>
+            <div class="feat-card"><div class="feat-icon">⚖️</div><div class="feat-title">KURUMSAL ONUR</div><div class="feat-desc">En yüksek etik standartları koruyoruz.</div></div>
+            <div class="feat-card"><div class="feat-icon">👥</div><div class="feat-title">TOPLUM KATILIMI</div><div class="feat-desc">Proaktif iletişim ve adil etkileşim.</div></div>
+            <div class="feat-card"><div class="feat-icon">📡</div><div class="feat-title">ORGANİZE YAPI</div><div class="feat-desc">Hiyerarşik rütbe ve birim sistemi.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="units-header">
+        <div class="sec-title">KOMUTA <span>YAPISI</span></div>
+        <div class="units-sub">UYUM İÇİNDE ÇALIŞAN UZMANLAŞMIŞ BİRİMLER</div>
+      </div>
+
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-top"><div class="unit-ico gold-ico">DEV</div><div><div class="unit-title">DEVRİYE BÜROSU</div><div class="unit-sub-label">Patrol Division</div></div></div>
+          <div class="unit-body"><div class="unit-desc">Şehrin her yerinde kesintisiz kapsama alanı sağlayan departmanın birincil müdahale gücü.</div><span class="unit-badge badge-open">Açık Alım</span></div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-top"><div class="unit-ico gold-ico">DED</div><div><div class="unit-title">DEDEKTİF BÜROSU</div><div class="unit-sub-label">Criminal Investigation</div></div></div>
+          <div class="unit-body"><div class="unit-desc">Karmaşık soruşturmalar, delil yönetimi ve organize suçla mücadele ile görevli uzman birim.</div><span class="unit-badge badge-select">Seçimle Alım</span></div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-top"><div class="unit-ico red-ico">TRF</div><div><div class="unit-title">TRAFİK BİRİMİ</div><div class="unit-sub-label">Traffic Enforcement</div></div></div>
+          <div class="unit-body"><div class="unit-desc">Yol güvenliği, alkollü araç kullanımı ve otoyol güvenliğine odaklanmış özel operasyon birimi.</div><span class="unit-badge badge-open">Açık Alım</span></div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-top"><div class="unit-ico blue-ico">AKD</div><div><div class="unit-title">AKADEMİ BİRİMİ</div><div class="unit-sub-label">Training Academy</div></div></div>
+          <div class="unit-body"><div class="unit-desc">Saha eğitimi ve hukuki seminerler yoluyla yeni nesil memurları yetiştiren eğitim birimi.</div><span class="unit-badge badge-select">Seçimle Alım</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border-top:1px solid var(--brown);border-bottom:1px solid var(--brown);padding:3rem 2rem">
+      <div style="max-width:1100px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:2.5rem">
+          <div class="sec-tag centered-tag">7/24 Aktif</div>
+          <div class="sec-title">İLETİŞİM <span>HATTI</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+          <div class="contact-card" onclick="void(0)">
+            <div class="contact-icon" style="background:rgba(114,137,218,.15);border:1px solid rgba(114,137,218,.3)">💬</div>
+            <div class="contact-title">DISCORD</div>
+            <div class="contact-desc">Topluluğumuza katılın, duyuruları takip edin ve ekiple iletişim kurun.</div>
+            <div style="background:rgba(114,137,218,.1);border:1px solid rgba(114,137,218,.3);border-radius:4px;padding:8px 16px;font-family:'Share Tech Mono',monospace;font-size:13px;color:#8fa0e0">discord.gg/bcsoonline</div>
+          </div>
+          <div class="contact-card contact-featured">
+            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0d0a07;font-size:10px;font-weight:700;padding:3px 14px;border-radius:10px;letter-spacing:2px;white-space:nowrap">ÖNERİLEN</div>
+            <div class="contact-icon" style="background:rgba(232,184,75,.15);border:1px solid rgba(232,184,75,.3)">📋</div>
+            <div class="contact-title">BAŞVURU FORMU</div>
+            <div class="contact-desc">BCSO'ya katılmak için resmi başvuru formunu doldurun. 48 saat içinde yanıt verilir.</div>
+            <button class="btn-gold" style="width:100%" onclick="selectForm('apply');showPage('forms',document.getElementById('formBtn'))">Hemen Başvur →</button>
+          </div>
+          <div class="contact-card" onclick="void(0)">
+            <div class="contact-icon" style="background:rgba(204,68,68,.1);border:1px solid rgba(204,68,68,.25)">⚠️</div>
+            <div class="contact-title">ŞİKAYET & ÖNERİ</div>
+            <div class="contact-desc">Bir personeli şikayet etmek veya öneri iletmek için formu kullanın.</div>
+            <button class="btn-ghost" style="width:100%" onclick="selectForm('complaint');showPage('forms',document.getElementById('formBtn'))">Form Doldur →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">BCSO ONLINE</div>
+          <div class="footer-brand-desc">Blaine County Sheriff's Office, topluma profesyonellik, dürüstlük ve kaliteli hizmet ile hizmet etmeye kararlıdır.</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigasyon</div>
+          <span class="footer-link" onclick="showPage('home', document.querySelectorAll('.nav-btn')[0])">Hakkımızda</span>
+          <span class="footer-link" onclick="showPage('hq', document.querySelectorAll('.nav-btn')[1])">BCSO HQ</span>
+          <span class="footer-link" onclick="showPage('roster', document.querySelectorAll('.nav-btn')[2])">Personeller</span>
+          <span class="footer-link" onclick="showPage('gallery', document.querySelectorAll('.nav-btn')[3])">Galeri</span>
+          <span class="footer-link" onclick="showPage('rules', document.querySelectorAll('.nav-btn')[5])">Yönetmelik</span>
+        </div>
+        <div>
+          <div class="footer-col-title">Kaynaklar</div>
+          <span class="footer-link">Hizmet Şartları</span>
+          <span class="footer-link">Gizlilik Politikası</span>
+          <span class="footer-link">Topluluk Kuralları</span>
+          <span class="footer-link">Destek Ekibi</span>
+        </div>
+        <div>
+          <div class="footer-col-title">Ekibe Katıl</div>
+          <div class="footer-join-desc">Blaine County'yi korumak cesaret, dürüstlük ve özveri gerektirir. Kanun uygulama kariyerine bugün başla.</div>
+          <span class="footer-join-link" onclick="selectForm('apply'); showPage('forms', document.getElementById('formBtn'))">Şimdi Başvur →</span>
+        </div>
+      </div>
+      <div class="footer-warn-wrap">
+        <div class="footer-warn">⚠ Bu site, gerçek Blaine County Sheriff's Office ile hiçbir resmi bağlantı taşımamaktadır. Tamamen FiveM rol yapma topluluğu tarafından oluşturulmuş hayali bir platformdur.</div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2019-2026 BCSO Online. Tüm hakları saklıdır.</div>
+        <div class="footer-dev">DEVELOPED BY BCSO TEAM ●</div>
+      </div>
+    </footer>
+  </div><!-- /page-home -->
+
+  <!-- ============ BCSO HQ ============ -->
+  <div id="page-hq" class="page">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div class="sec-tag centered-tag">Resmi Bilgilendirme Merkezi</div>
+        <div class="sec-title">BCSO <span>HQ</span></div>
+        <div class="sec-desc" style="margin:0 auto">Komuta tarafından yayınlanan resmi duyurular, afişler ve haberler.</div>
+      </div>
+      <div id="hq-content">
+        <div style="text-align:center;padding:4rem;color:var(--muted)">Henüz haber yayınlanmamış.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ GALERİ ============ -->
+  <div id="page-gallery" class="page">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div class="sec-tag centered-tag">Resmi Fotoğraf Arşivi</div>
+        <div class="sec-title">GALERİ <span>ARŞİVİ</span></div>
+        <div class="sec-desc" style="margin:0 auto">Departman operasyonları, etkinlikler ve özel anlara ait fotoğraf arşivi.</div>
+      </div>
+      <div id="gallery-content" class="gallery-grid">
+        <div style="text-align:center;padding:4rem;color:var(--muted);grid-column:1/-1">Henüz galeri fotoğrafı eklenmemiş.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ROSTER ============ -->
+  <div id="page-roster" class="page">
+    <div class="inner">
+      <div class="roster-page-header">
+        <div class="sec-tag centered-tag">Resmi Personel Veritabanı</div>
+        <div class="roster-main-title">PERSONEL <span>LİSTESİ</span></div>
+        <div class="roster-main-desc">Blaine County'ye cesaret ve dürüstlükle hizmet eden kadın ve erkeklerin kapsamlı listesi.</div>
+      </div>
+      <div id="roster-content"></div>
+    </div>
+  </div>
+
+  <!-- ============ FORMLAR ============ -->
+  <div id="page-forms" class="page">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div class="sec-tag centered-tag">Resmi Form Sistemi</div>
+        <div class="sec-title">FORM <span>MERKEZİ</span></div>
+      </div>
+      <div class="forms-grid">
+        <div id="fcard-apply" class="form-type-card sel" onclick="selectForm('apply')">
+          <div class="form-ticon">📋</div>
+          <div class="form-ttitle">BAŞVURU FORMU</div>
+          <div class="form-tdesc">BCSO'ya katılın</div>
+        </div>
+        <div id="fcard-praise" class="form-type-card" onclick="selectForm('praise')">
+          <div class="form-ticon">✔</div>
+          <div class="form-ttitle">ÖVGÜ FORMU</div>
+          <div class="form-tdesc">Personeli takdir edin</div>
+        </div>
+        <div id="fcard-complaint" class="form-type-card" onclick="selectForm('complaint')">
+          <div class="form-ticon">⚠</div>
+          <div class="form-ttitle">ŞİKAYET FORMU</div>
+          <div class="form-tdesc">Sorun bildirin</div>
+        </div>
+        <div id="fcard-ticket" class="form-type-card" onclick="selectForm('ticket')">
+          <div class="form-ticon">🎫</div>
+          <div class="form-ttitle">DESTEK TALEBİ</div>
+          <div class="form-tdesc">Yardım talep edin</div>
+        </div>
+      </div>
+
+      <!-- Başvuru Formu -->
+      <div id="form-apply" class="form-box">
+        <div class="form-section-lbl">Katılım Başvurusu</div>
+        <div class="form-row">
+          <div class="fg"><label>Ad Soyad</label><input type="text" id="apply-name" placeholder="Ad Soyad"></div>
+          <div class="fg"><label>Discord</label><input type="text" id="apply-discord" placeholder="kullanici#0000"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>FiveM Deneyimi</label>
+            <select id="apply-exp"><option value="">Seçiniz</option><option>1 yıldan az</option><option>1-2 yıl</option><option>2-3 yıl</option><option>3+ yıl</option></select>
+          </div>
+          <div class="fg"><label>Başvurduğu Birim</label>
+            <select id="apply-unit"><option value="">Seçiniz</option><option>Patrol Division</option><option>Detective Bureau</option><option>Traffic Enforcement</option><option>K-9 Unit</option><option>Air Support</option><option>Training Academy</option></select>
+          </div>
+        </div>
+        <div class="fg"><label>RP Deneyimi</label><textarea id="apply-rpexp" placeholder="Roleplay deneyiminizi kısaca anlatın..."></textarea></div>
+        <div class="fg"><label>Neden BCSO?</label><textarea id="apply-reason" placeholder="Neden BCSO'ya katılmak istiyorsunuz?"></textarea></div>
+        <button class="btn-gold" onclick="submitApply()">Başvuruyu Gönder →</button>
+      </div>
+
+      <!-- Övgü Formu -->
+      <div id="form-praise" class="form-box" style="display:none">
+        <div class="form-section-lbl">Personel Övgü Formu</div>
+        <div class="form-row">
+          <div class="fg"><label>Adınız</label><input type="text" id="praise-name" placeholder="Ad Soyad"></div>
+          <div class="fg"><label>Övülen Personel</label><input type="text" id="praise-target" placeholder="Personel adı"></div>
+        </div>
+        <div class="fg"><label>Açıklama</label><textarea id="praise-desc" placeholder="Bu personeli neden takdir ediyorsunuz?"></textarea></div>
+        <button class="btn-gold" onclick="submitPraise()">Övgüyü Gönder →</button>
+      </div>
+
+      <!-- Şikayet Formu -->
+      <div id="form-complaint" class="form-box" style="display:none">
+        <div class="form-section-lbl">Personel Şikayet Formu</div>
+        <div class="form-row">
+          <div class="fg"><label>Adınız</label><input type="text" id="complaint-name" placeholder="Ad Soyad"></div>
+          <div class="fg"><label>Şikayet Edilen Personel</label><input type="text" id="complaint-target" placeholder="Personel adı"></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Olay Tarihi</label><input type="date" id="complaint-date"></div>
+          <div class="fg"><label>Olay Yeri</label><input type="text" id="complaint-loc" placeholder="Konum"></div>
+        </div>
+        <div class="fg"><label>Açıklama</label><textarea id="complaint-desc" placeholder="Olayı ayrıntılı olarak anlatın..."></textarea></div>
+        <button class="btn-gold" onclick="submitComplaint()">Şikayeti Gönder →</button>
+      </div>
+
+      <!-- Destek Talebi (Ticket) Formu -->
+      <div id="form-ticket" class="form-box" style="display:none">
+        <div class="form-section-lbl">Destek Talebi (Ticket)</div>
+        <div class="form-row">
+          <div class="fg"><label>Adınız</label><input type="text" id="ticket-name" placeholder="Ad Soyad"></div>
+          <div class="fg"><label>Discord</label><input type="text" id="ticket-discord" placeholder="kullanici#0000"></div>
+        </div>
+        <div class="fg"><label>Konu Kategorisi</label>
+          <select id="ticket-cat">
+            <option value="">Kategori seçin</option>
+            <option>Teknik Sorun</option>
+            <option>Moderasyon Şikayeti</option>
+            <option>Hesap Sorunu</option>
+            <option>Oyun İçi Sorun</option>
+            <option>Genel Soru</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+        <div class="fg"><label>Konu Başlığı</label><input type="text" id="ticket-subject" placeholder="Kısa bir konu başlığı"></div>
+        <div class="fg"><label>Açıklama</label><textarea id="ticket-desc" placeholder="Sorununuzu veya talebinizi ayrıntılı olarak açıklayın..."></textarea></div>
+        <div style="background:rgba(74,144,204,.08);border:1px solid rgba(74,144,204,.2);border-radius:6px;padding:.75rem 1rem;margin-bottom:1rem;font-size:12px;color:var(--info)">
+          ℹ️ Destek talebiniz admin paneline iletilecek ve en kısa sürede yanıtlanacaktır. Ortalama yanıt süresi: &lt;24 saat.
+        </div>
+        <button class="btn-gold" onclick="submitTicket()">Talebi Gönder →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ YÖNETMELİK ============ -->
+  <div id="page-rules" class="page">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:2.5rem">
+        <div class="sec-tag centered-tag">Resmi Departman Belgesi</div>
+        <div class="sec-title">DEPARTMAN <span>YÖNETMELİĞİ</span></div>
+        <div class="sec-desc" style="margin:0 auto">BCSO üyelerinin uymakla yükümlü olduğu resmi kurallar ve prosedürler.</div>
+      </div>
+      <div class="rules-block">
+        <div class="rules-cat">🛡️ Temel İlkeler</div>
+        <div class="rule-row"><div class="rule-num">MADDE 1.1</div><div class="rule-text">Tüm personel görev esnasında ve dışında saygılı, dürüst ve profesyonel davranmak zorundadır.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 1.2</div><div class="rule-text">Departman hiyerarşisine saygı göstermek ve üst rütbelilerin talimatlarına uymak zorunludur.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 1.3</div><div class="rule-text">Yolsuzluk, rüşvet ve görev ihmali disiplin işlemine konu olur.</div></div>
+      </div>
+      <div class="rules-block">
+        <div class="rules-cat">📡 Görev Kuralları</div>
+        <div class="rule-row"><div class="rule-num">MADDE 2.1</div><div class="rule-text">Görev başlamadan önce mesai sistemi üzerinden kayıt yapılması zorunludur.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 2.2</div><div class="rule-text">Tüm taktik harekat öncesinde amir onayı alınmalıdır.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 2.3</div><div class="rule-text">Görev logu düzenli olarak güncellenmelidir.</div></div>
+      </div>
+      <div class="rules-block">
+        <div class="rules-cat">⚖️ Disiplin Prosedürleri</div>
+        <div class="rule-row"><div class="rule-num">MADDE 3.1</div><div class="rule-text">İlk ihlalde sözlü uyarı verilir. Tekrarında yazılı uyarıya geçilir.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 3.2</div><div class="rule-text">Üç uyarı sonrasında geçici görevden uzaklaştırma uygulanabilir.</div></div>
+        <div class="rule-row"><div class="rule-num">MADDE 3.3</div><div class="rule-text">Ağır ihlallerde Komuta Birimi tarafından ihraç kararı alınabilir.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-site -->
+
+<!-- ============ PANEL LAYER ============ -->
+<div id="panel-layer" style="display:none">
+
+  <!-- Giriş Ekranı -->
+  <div id="screen-login" class="pscreen">
+    <div class="login-wrap">
+      <div class="login-box">
+        <div class="login-logo">BCSO</div>
+        <div class="login-title">PERSONEL PANELİ</div>
+        <div class="login-sub">Blaine County Sheriff's Office</div>
+        <div class="lf"><label>Kullanıcı Adı</label><input type="text" id="lu" placeholder="kullanici_adi" onkeydown="if(event.key==='Enter') doLogin()"></div>
+        <div class="lf"><label>Şifre</label><input type="password" id="lp" placeholder="••••••" onkeydown="if(event.key==='Enter') doLogin()"></div>
+        <div class="login-err" id="lerr"></div>
+        <button class="btn-full" onclick="doLogin()">GİRİŞ YAP</button>
+        <div class="hint">Demo: <span>admin</span> / <span>admin123</span></div>
+        <button style="margin-top:1rem;width:100%;background:none;border:1px solid var(--brown);border-radius:4px;padding:8px;color:var(--muted);cursor:pointer;font-size:12px" onclick="closePanel()">← Siteye Dön</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="screen-dash" class="pscreen" style="display:none">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="topbar-brand">BCSO PANEL</div>
+        <div class="rank-pill" id="tr"></div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-name" id="tn"></span>
+        <div style="position:relative">
+          <button class="notif-btn" onclick="toggleNotif()">🔔<span class="notif-count" id="nc" style="display:none">0</span></button>
+          <div class="notif-panel" id="notif-panel">
+            <div class="notif-header">Bildirimler <button onclick="clearNotifs()" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer">Temizle</button></div>
+            <div id="notif-list"></div>
+          </div>
+        </div>
+        <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀️ Aydınlık</button>
+        <button class="logout-btn" onclick="doLogout()">Çıkış</button>
+        <button class="logout-btn" onclick="closePanel()" style="border-color:var(--brown)">← Site</button>
+      </div>
+    </div>
+
+    <div class="dash">
+      <div class="sidebar" id="sidebar"></div>
+      <div class="content">
+
+        <!-- HOME TAB -->
+        <div id="tab-home" class="tab">
+          <div class="panel-title">Kontrol <span>Paneli</span></div>
+          <div class="stat-grid" id="sg"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div class="pcard">
+              <div class="sec-lbl">Bekleyen İşlemler</div>
+              <div id="pending-list"></div>
+            </div>
+            <div class="pcard">
+              <div class="sec-lbl">Son Aktiviteler</div>
+              <div id="recent-act"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROFİL TAB -->
+        <div id="tab-profile" class="tab">
+          <div class="panel-title">Profilim</div>
+          <div class="pcard" style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+            <div style="position:relative">
+              <div class="pav-circle" id="pav" style="position:relative;overflow:hidden">
+                <img id="pav-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0">
+              </div>
+            </div>
+            <div style="flex:1">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px" id="pname"></div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:.75rem" id="pmeta"></div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem">
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Rütbe</div><div class="pi-val" id="pi-rank"></div></div>
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Birim</div><div class="pi-val" id="pi-unit"></div></div>
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Rozet</div><div class="pi-val" id="pi-badge"></div></div>
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Discord</div><div class="pi-val" id="pi-discord"></div></div>
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Uyarı</div><div class="pi-val" id="pi-warns"></div></div>
+                <div class="pcard" style="padding:.75rem"><div class="pi-lbl">Görev</div><div class="pi-val" id="pi-duties"></div></div>
+              </div>
+              <div class="progress-bar" style="margin-top:.75rem"><div class="progress-fill" id="rank-prog" style="width:0%"></div></div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px" id="rank-prog-label"></div>
+            </div>
+          </div>
+          <div class="pcard">
+            <div class="sec-lbl">Şifre Değiştir</div>
+            <div class="form-row">
+              <div class="fg"><label>Mevcut Şifre</label><input type="password" id="old-pass" placeholder="••••••"></div>
+              <div class="fg"><label>Yeni Şifre</label><input type="password" id="new-pass2" placeholder="••••••"></div>
+            </div>
+            <div id="pass-alert"></div>
+            <button class="btn-sm" onclick="changePass()">Güncelle</button>
+          </div>
+          <div class="panel-title" style="font-size:16px">Belgelerim</div>
+          <div id="my-docs-list"></div>
+          <div class="panel-title" style="font-size:16px">Gelen Kutusu</div>
+          <div id="my-dms-list"></div>
+        </div>
+
+        <!-- MESAİ TAB -->
+        <div id="tab-mesai" class="tab">
+          <div class="panel-title">Mesai <span>Sistemi</span></div>
+          <div class="pcard" style="text-align:center">
+            <div style="font-size:48px;font-family:'Share Tech Mono',monospace;color:var(--gold);margin-bottom:.75rem" id="mesai-timer">00:00:00</div>
+            <div id="mesai-status" style="margin-bottom:1rem"></div>
+            <button class="btn-gold" id="mesai-btn" onclick="startMesai()">Mesaiye Başla</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+            <div class="sec-lbl" style="margin:0">Toplam Mesai: <span id="mesai-toplam" style="color:var(--gold)">0s 0dk</span></div>
+          </div>
+          <div id="mesai-list"></div>
+          <div id="mesai-admin-section" style="display:none">
+            <hr class="divider">
+            <div class="panel-title" style="font-size:16px">Tüm Personel Mesai Özeti</div>
+            <div id="mesai-admin-list"></div>
+          </div>
+        </div>
+
+        <!-- BİRİM TAB -->
+        <div id="tab-unit" class="tab">
+          <div class="panel-title">Birim: <span id="unit-title"></span></div>
+          <div class="tab-switcher">
+            <button class="tab-sw-btn active" onclick="unitTab('members',this)">👥 Üyeler</button>
+            <button class="tab-sw-btn" onclick="unitTab('stats',this)">📊 İstatistik</button>
+            <button class="tab-sw-btn" onclick="unitTab('announce',this)">📢 Duyurular</button>
+            <button class="tab-sw-btn" onclick="unitTab('chat',this)">💬 Sohbet</button>
+            <button class="tab-sw-btn" onclick="unitTab('duties',this)">🚔 Aktif Görevler</button>
+          </div>
+          <div id="unit-members">
+            <div class="tbl-wrap"><table class="tbl"><thead><tr><th>İsim</th><th>Rütbe</th><th>Rozet</th><th>Görev</th><th>Durum</th></tr></thead><tbody id="unit-tbody"></tbody></table></div>
+          </div>
+          <div id="unit-stats" style="display:none">
+            <div class="stat-grid" id="unit-stat-grid"></div>
+          </div>
+          <div id="unit-announce" style="display:none">
+            <div class="pcard" id="unit-ann-form">
+              <div class="sec-lbl">Duyuru Yayınla</div>
+              <div class="fg"><label>Başlık</label><input type="text" id="ann-title" placeholder="Duyuru başlığı"></div>
+              <div class="fg"><label>İçerik</label><textarea id="ann-content" placeholder="Duyuru içeriği..."></textarea></div>
+              <button class="btn-sm" onclick="postAnnounce()">Yayınla</button>
+            </div>
+            <div id="ann-list"></div>
+          </div>
+          <div id="unit-chat" style="display:none">
+            <div class="chat-wrap">
+              <div class="chat-msgs" id="chat-msgs"></div>
+              <div class="chat-input-wrap">
+                <input class="chat-input" id="chat-inp" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter')sendChat()">
+                <button class="chat-send" onclick="sendChat()">Gönder</button>
+              </div>
+            </div>
+          </div>
+          <div id="unit-duties" style="display:none">
+            <div class="pcard">
+              <div class="sec-lbl">Aktif Görev Başlat</div>
+              <div class="form-row">
+                <div class="fg"><label>Görev Türü</label>
+                  <select id="duty-type"><option>Devriye</option><option>Trafik Denetimi</option><option>Olay Müdahalesi</option><option>Operasyon</option><option>Eğitim</option><option>Koruma</option></select>
+                </div>
+                <div class="fg"><label>Konum</label><input type="text" id="duty-loc" placeholder="Konum"></div>
+              </div>
+              <button class="btn-sm" onclick="startDuty()">Görevi Başlat</button>
+            </div>
+            <div id="duty-list"></div>
+          </div>
+        </div>
+
+        <!-- BELGELER TAB -->
+        <div id="tab-docs" class="tab">
+          <div class="panel-title">Belgeler</div>
+          <div id="doc-alert"></div>
+          <div class="tab-switcher">
+            <button class="tab-sw-btn active" onclick="docTab('write',this)">Belge Yaz</button>
+            <button class="tab-sw-btn" onclick="docTab('archive',this)">Arşiv</button>
+            <button class="tab-sw-btn" onclick="docTab('pending',this)">Onay Bekleyen</button>
+          </div>
+          <div id="doc-write">
+            <div class="pcard">
+              <div class="sec-lbl">Hazır Şablon Seç</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem" id="tmpl-grid"></div>
+              <hr class="divider" style="margin:.5rem 0">
+              <div class="form-row">
+                <div class="fg"><label>Belge Türü</label>
+                  <select id="doc-type"><option>Eğitim Belgesi</option><option>Görev Raporu</option><option>Uyarı Belgesi</option><option>Terfi Önerisi</option><option>İzin Formu</option><option>Disiplin Kararı</option><option>Takdirname</option></select>
+                </div>
+                <div class="fg"><label>Hedef Personel</label><select id="doc-target"></select></div>
+              </div>
+              <div class="fg"><label>İçerik</label><textarea id="doc-content" placeholder="Belge içeriği..." style="min-height:90px"></textarea></div>
+              <div class="fg"><label>Gizlilik</label>
+                <select id="doc-privacy"><option value="open">Herkese Açık</option><option value="private">Gizli (Sadece Komuta)</option></select>
+              </div>
+              <button class="btn-sm" onclick="createDoc()">Kaydet & İmzala</button>
+              <button class="btn-sm outline" onclick="previewDoc()">Önizle</button>
+            </div>
+            <div id="doc-preview-box" style="display:none" class="pcard">
+              <div class="sec-lbl">Önizleme</div>
+              <div id="doc-preview-content"></div>
+            </div>
+          </div>
+          <div id="doc-archive" style="display:none">
+            <div class="search-bar"><input type="text" id="doc-search" placeholder="Belge ara..." oninput="renderDocArchive()"></div>
+            <div id="doc-archive-list"></div>
+          </div>
+          <div id="doc-pending" style="display:none"><div id="doc-pending-list"></div></div>
+        </div>
+
+        <!-- İZİN TAB -->
+        <div id="tab-leave" class="tab">
+          <div class="panel-title">İzin <span>Sistemi</span></div>
+          <div id="leave-alert"></div>
+          <div class="pcard">
+            <div class="sec-lbl">İzin Talebi Gönder</div>
+            <div class="form-row">
+              <div class="fg"><label>Başlangıç</label><input type="date" id="leave-start"></div>
+              <div class="fg"><label>Bitiş</label><input type="date" id="leave-end"></div>
+            </div>
+            <div class="fg"><label>İzin Türü</label>
+              <select id="leave-type"><option>Yıllık İzin</option><option>Sağlık İzni</option><option>Kişisel İzin</option><option>Eğitim İzni</option></select>
+            </div>
+            <div class="fg"><label>Açıklama</label><textarea id="leave-desc" placeholder="İzin nedeninizi kısaca belirtin..."></textarea></div>
+            <button class="btn-sm" onclick="sendLeave()">Talep Gönder</button>
+          </div>
+          <div class="panel-title" style="font-size:16px">İzin Geçmişim</div>
+          <div id="leave-list"></div>
+          <div id="leave-approve-section" style="display:none">
+            <hr class="divider">
+            <div class="panel-title" style="font-size:16px">Bekleyen Talepler <span>(Onay)</span></div>
+            <div id="leave-pending-list"></div>
+          </div>
+        </div>
+
+        <!-- GÖREV LOGU TAB -->
+        <div id="tab-dutylog" class="tab">
+          <div class="panel-title">Görev <span>Logu</span></div>
+          <div class="pcard">
+            <div class="sec-lbl">Görev Kaydı Ekle</div>
+            <div class="form-row">
+              <div class="fg"><label>Görev Türü</label>
+                <select id="gl-type"><option>Devriye</option><option>Müdahale</option><option>Operasyon</option><option>Trafik</option><option>Eğitim</option></select>
+              </div>
+              <div class="fg"><label>Süre (saat)</label><input type="number" id="gl-dur" placeholder="2" min="0" max="12"></div>
+            </div>
+            <div class="fg"><label>Detay</label><textarea id="gl-detail" placeholder="Görev detayları..." style="min-height:60px"></textarea></div>
+            <button class="btn-sm" onclick="addDutyLog()">Görev Kaydet</button>
+          </div>
+          <div class="search-bar"><input type="text" id="gl-search" placeholder="Görevlerde ara..." oninput="renderDutyLog()"></div>
+          <div id="duty-log-list"></div>
+        </div>
+
+        <!-- DİSİPLİN TAB -->
+        <div id="tab-discipline" class="tab">
+          <div class="panel-title">Uyarı & <span>Disiplin</span></div>
+          <div id="disc-alert"></div>
+          <div class="pcard">
+            <div class="sec-lbl">Uyarı Ver</div>
+            <div class="form-row">
+              <div class="fg"><label>Personel</label><select id="warn-target"></select></div>
+              <div class="fg"><label>Uyarı Türü</label>
+                <select id="warn-type"><option>Sözlü Uyarı</option><option>Yazılı Uyarı</option><option>Görevden Uzaklaştırma</option><option>İhraç</option></select>
+              </div>
+            </div>
+            <div class="fg"><label>Açıklama</label><textarea id="warn-desc" placeholder="Uyarı nedeni..."></textarea></div>
+            <button class="btn-sm" onclick="addWarning()">Uyarı Kaydet</button>
+          </div>
+          <div class="panel-title" style="font-size:16px">Disiplin Sicili</div>
+          <div id="discipline-list"></div>
+        </div>
+
+        <!-- TERFİ TAB -->
+        <div id="tab-promotion" class="tab">
+          <div class="panel-title">Terfi <span>Sistemi</span></div>
+          <div id="promo-alert"></div>
+          <div class="pcard">
+            <div class="sec-lbl">Terfi Teklifi</div>
+            <div class="form-row">
+              <div class="fg"><label>Personel</label><select id="promo-target"></select></div>
+              <div class="fg"><label>Önerilen Rütbe</label><select id="promo-rank"></select></div>
+            </div>
+            <div class="fg"><label>Gerekçe</label><textarea id="promo-reason" placeholder="Terfi gerekçesi..."></textarea></div>
+            <button class="btn-sm" onclick="sendPromo()">Teklif Gönder</button>
+          </div>
+          <div class="panel-title" style="font-size:16px">Bekleyen Teklifler</div>
+          <div id="promo-list"></div>
+        </div>
+
+        <!-- PERSONEL YÖNETİMİ TAB -->
+        <div id="tab-personnel" class="tab">
+          <div class="panel-title">Personel <span>Yönetimi</span></div>
+          <div id="pers-alert-tab"></div>
+          <div class="pcard">
+            <div class="sec-lbl">Yeni Personel Oluştur</div>
+            <div class="form-row">
+              <div class="fg"><label>Kullanıcı Adı</label><input type="text" id="p-nu" placeholder="kullanici_adi"></div>
+              <div class="fg"><label>Oyun İçi İsim</label><input type="text" id="p-nn" placeholder="Ad Soyad"></div>
+            </div>
+            <div class="form-row3">
+              <div class="fg"><label>Şifre</label><input type="password" id="p-np" placeholder="••••••"></div>
+              <div class="fg"><label>Rütbe</label><select id="p-nr"></select></div>
+              <div class="fg"><label>Birim</label>
+                <select id="p-nunit"><option>Patrol Division</option><option>Detective Bureau</option><option>Traffic Enforcement</option><option>K-9 Unit</option><option>Air Support</option><option>Training Academy</option></select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="fg"><label>Rozet No</label><input type="text" id="p-nbadge" placeholder="#0000"></div>
+              <div class="fg"><label>Discord</label><input type="text" id="p-ndisc" placeholder="kullanici#0000"></div>
+            </div>
+            <button class="btn-sm" onclick="createPersonnelTab()">Personel Oluştur</button>
+          </div>
+          <div class="search-bar"><input type="text" id="pers-search" placeholder="Personel ara..." oninput="renderPersonnel()"></div>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>İsim</th><th>Rütbe</th><th>Birim</th><th>Rozet</th><th>Uyarı</th><th>İşlem</th></tr></thead><tbody id="pers-tbody"></tbody></table></div>
+        </div>
+
+        <!-- AKTİVİTE LOGU TAB -->
+        <div id="tab-actlog" class="tab">
+          <div class="panel-title">Aktivite <span>Geçmişi</span></div>
+          <div class="search-bar"><input type="text" id="act-search" placeholder="Ara..." oninput="renderActLog()"></div>
+          <div id="act-log-list"></div>
+        </div>
+
+        <!-- ADMİN PANELİ TAB -->
+        <div id="tab-admin" class="tab">
+          <div class="panel-title">Admin <span>Paneli</span></div>
+          <div class="tab-switcher" style="flex-wrap:wrap">
+            <button class="tab-sw-btn active" onclick="adminTab('applies',this)">📋 Başvurular</button>
+            <button class="tab-sw-btn" onclick="adminTab('complaints',this)">⚠️ Şikayetler</button>
+            <button class="tab-sw-btn" onclick="adminTab('praises',this)">✔ Övgüler</button>
+            <button class="tab-sw-btn" onclick="adminTab('tickets',this)">🎫 Destek Talepleri</button>
+            <button class="tab-sw-btn" onclick="adminTab('personnel',this)">👥 Personel</button>
+            <button class="tab-sw-btn" onclick="adminTab('hq',this)">📰 BCSO HQ</button>
+            <button class="tab-sw-btn" onclick="adminTab('galeri',this)">🖼️ Galeri</button>
+            <button class="tab-sw-btn" onclick="adminTab('dm',this)">💬 Özel Mesaj</button>
+            <button class="tab-sw-btn" onclick="adminTab('settings',this)">⚙️ Ayarlar</button>
+          </div>
+
+          <!-- Başvurular -->
+          <div id="adm-applies"><div id="adm-applies-list"></div></div>
+
+          <!-- Şikayetler -->
+          <div id="adm-complaints" style="display:none"><div id="adm-complaints-list"></div></div>
+
+          <!-- Övgüler -->
+          <div id="adm-praises" style="display:none"><div id="adm-praises-list"></div></div>
+
+          <!-- Destek Talepleri (Ticket) -->
+          <div id="adm-tickets" style="display:none">
+            <div id="adm-tickets-list"></div>
+          </div>
+
+          <!-- Personel -->
+          <div id="adm-personnel" style="display:none">
+            <div class="pcard">
+              <div class="sec-lbl">Yeni Personel Oluştur</div>
+              <div class="form-row">
+                <div class="fg"><label>Kullanıcı Adı</label><input type="text" id="a-nu" placeholder="kullanici_adi"></div>
+                <div class="fg"><label>Oyun İçi İsim</label><input type="text" id="a-nn" placeholder="Ad Soyad"></div>
+              </div>
+              <div class="form-row3">
+                <div class="fg"><label>Şifre</label><input type="password" id="a-np" placeholder="••••••"></div>
+                <div class="fg"><label>Rütbe</label><select id="a-nr"></select></div>
+                <div class="fg"><label>Birim</label>
+                  <select id="a-nunit"><option>Patrol Division</option><option>Detective Bureau</option><option>Traffic Enforcement</option><option>K-9 Unit</option><option>Air Support</option><option>Training Academy</option></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="fg"><label>Rozet No</label><input type="text" id="a-nbadge" placeholder="#0000"></div>
+                <div class="fg"><label>Discord</label><input type="text" id="a-ndisc" placeholder="kullanici#0000"></div>
+              </div>
+              <div id="adm-pers-alert"></div>
+              <button class="btn-sm" onclick="createPersonnelAdmin()">Personel Oluştur</button>
+            </div>
+            <div class="search-bar">
+              <input type="text" id="adm-pers-search" placeholder="İsim, rütbe veya birim ara..." oninput="renderAdminPersonnel()">
+            </div>
+            <div id="adm-personnel-list"></div>
+          </div>
+
+          <!-- BCSO HQ Yönetimi -->
+          <div id="adm-hq" style="display:none">
+            <div class="pcard">
+              <div class="sec-lbl">Yeni HQ Haberi / Afiş Ekle</div>
+              <div class="fg"><label>Başlık</label><input type="text" id="hq-title" placeholder="Haber veya afiş başlığı"></div>
+              <div class="fg"><label>İçerik / Açıklama</label><textarea id="hq-content-inp" placeholder="Haber içeriği, duyuru metni..."></textarea></div>
+              <div class="fg"><label>Görsel URL (opsiyonel)</label><input type="text" id="hq-img-url" placeholder="https://..."></div>
+              <div class="fg"><label>Tür</label>
+                <select id="hq-type"><option value="haber">📰 Haber</option><option value="afis">🖼️ Afiş</option><option value="duyuru">📢 Duyuru</option><option value="operasyon">🚔 Operasyon Raporu</option></select>
+              </div>
+              <button class="btn-sm" onclick="addHQPost()">Yayınla</button>
+            </div>
+            <div class="panel-title" style="font-size:16px">Yayınlanan İçerikler</div>
+            <div id="adm-hq-list"></div>
+          </div>
+
+          <!-- Galeri Yönetimi -->
+          <div id="adm-galeri" style="display:none">
+            <div class="pcard">
+              <div class="sec-lbl">Galeriye Fotoğraf Ekle</div>
+              <div class="fg"><label>Görsel URL</label><input type="text" id="gal-url" placeholder="https://..."></div>
+              <div class="fg"><label>Başlık</label><input type="text" id="gal-title" placeholder="Fotoğraf başlığı"></div>
+              <div class="fg"><label>Açıklama (opsiyonel)</label><input type="text" id="gal-desc" placeholder="Kısa açıklama"></div>
+              <button class="btn-sm" onclick="addGalleryPhoto()">Ekle</button>
+            </div>
+            <div class="panel-title" style="font-size:16px">Galeri Fotoğrafları</div>
+            <div id="adm-gallery-list" class="gallery-grid" style="margin-top:.5rem"></div>
+          </div>
+
+          <!-- DM -->
+          <div id="adm-dm" style="display:none"></div>
+
+          <!-- Ayarlar -->
+          <div id="adm-settings" style="display:none">
+            <div class="pcard">
+              <div class="sec-lbl">Duyuru Modu</div>
+              <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
+                <span style="font-size:13px;color:var(--muted)">Durum: <b id="adm-announce-status">Pasif</b></span>
+                <button class="btn-sm" onclick="toggleAnnounceMode()">Modu Değiştir</button>
+              </div>
+              <div class="fg"><label>Banner Mesajı</label><input type="text" id="adm-announce-msg" placeholder="Duyuru metni..."></div>
+              <button class="btn-sm" onclick="saveAnnounceMsg()">Kaydet</button>
+            </div>
+            <div class="pcard" style="margin-top:1rem">
+              <div class="sec-lbl">Sistem</div>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                <button class="btn-sm outline" onclick="adminClearLog()">Aktivite Logunu Temizle</button>
+                <button class="btn-sm outline" style="border-color:var(--danger);color:var(--danger)" onclick="adminResetAll()">Tüm Veriyi Sıfırla</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tab-admin -->
+
+      </div><!-- /content -->
+    </div><!-- /dash -->
+  </div><!-- /screen-dash -->
+</div><!-- /panel-layer -->
+
+<!-- Fotoğraf Lightbox -->
+<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;display:none;align-items:center;justify-content:center;cursor:pointer" onclick="this.style.display='none'">
+  <img id="lightbox-img" src="" style="max-width:90%;max-height:90vh;border-radius:8px;border:2px solid var(--brown)">
+</div>
+
+<script src="script.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>

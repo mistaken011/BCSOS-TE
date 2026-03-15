@@ -30,7 +30,7 @@ async function fsAll(col) {
   try { const s=await getDocs(collection(db,col)); return s.docs.map(d=>({_id:d.id,...d.data()})); } catch(e){ return []; }
 }
 
-const RANKS = ['Cadet','Deputy','Corporal','Sergeant I','Sergeant II','Lieutenant','Captain','Under Sheriff','Sheriff'];
+const RANKS = ['Cadet','Sheriff Deputy','Sheriff Deputy I','Sheriff Deputy Bonus II','Sheriff Deputy Bonus III','Sergeant','Lieutenant','Captain'];
 const RL = {}; RANKS.forEach((r,i)=>{ RL[r]=i; });
 const UNITS = ['Patrol Division','Detective Bureau','Traffic Enforcement','K-9 Unit','Air Support','Training Academy'];
 const TMPL = [
@@ -50,10 +50,10 @@ async function initData(){
   const ex = await fsGet('pers','admin');
   if(!ex){
     const def=[
-      {id:'admin',username:'admin',password:'admin123',name:'Jack Stone',rank:'Sheriff',unit:'Patrol Division',badge:'#0001',discord:'jackstone#0001',online:true,warns:0,duties:14,isAdmin:true,photo:''},
-      {id:'usheriff',username:'usheriff',password:'under123',name:'Maria Reyes',rank:'Under Sheriff',unit:'Patrol Division',badge:'#0012',discord:'maria#0012',online:true,warns:0,duties:9,isAdmin:false,photo:''},
-      {id:'sgt',username:'sgt',password:'sgt123',name:'Daniel Bullock',rank:'Sergeant II',unit:'Patrol Division',badge:'#7520',discord:'bullock#7520',online:false,warns:1,duties:22,isAdmin:false,photo:''},
-      {id:'dep1',username:'dep1',password:'dep123',name:'Alex Walker',rank:'Deputy',unit:'Patrol Division',badge:'#8801',discord:'walker#8801',online:true,warns:0,duties:7,isAdmin:false,photo:''},
+      {id:'admin',username:'admin',password:'admin123',name:'Jack Stone',rank:'Captain',unit:'Patrol Division',badge:'#0001',discord:'jackstone#0001',online:true,warns:0,duties:14,isAdmin:true,photo:''},
+      {id:'usheriff',username:'usheriff',password:'under123',name:'Maria Reyes',rank:'Lieutenant',unit:'Patrol Division',badge:'#0012',discord:'maria#0012',online:true,warns:0,duties:9,isAdmin:false,photo:''},
+      {id:'sgt',username:'sgt',password:'sgt123',name:'Daniel Bullock',rank:'Sergeant',unit:'Patrol Division',badge:'#7520',discord:'bullock#7520',online:false,warns:1,duties:22,isAdmin:false,photo:''},
+      {id:'dep1',username:'dep1',password:'dep123',name:'Alex Walker',rank:'Sheriff Deputy',unit:'Patrol Division',badge:'#8801',discord:'walker#8801',online:true,warns:0,duties:7,isAdmin:false,photo:''},
       {id:'cadet1',username:'cadet1',password:'cadet123',name:'James Park',rank:'Cadet',unit:'Training Academy',badge:'#9901',discord:'jpark#9901',online:true,warns:0,duties:3,isAdmin:false,photo:''},
     ];
     for(const p of def) await fsSet('pers',p.id,p);

@@ -30,21 +30,22 @@ var RANK_SUBS  = {
 function renderRoster() {
   var el = document.getElementById('roster-content');
   if (!el) return;
-  var pers = [];
-  try { pers = JSON.parse(localStorage.getItem('bcso2_pers') || '[]'); } catch(e) {}
-  if (!pers.length) {
-    el.innerHTML = '<div style="text-align:center;padding:3rem;color:#8a7a5a">Henüz personel kaydı yok.</div>';
-    return;
+  el.innerHTML = '<div style="text-align:center;padding:3rem;color:#8a7a5a">Yükleniyor...</div>';
+  if (typeof window.getPersForRoster === 'function') {
+    window.getPersForRoster().then(function(pers) { _renderRosterData(el, pers); });
+  } else {
+    var pers = []; try { pers = JSON.parse(localStorage.getItem('bcso2_pers') || '[]'); } catch(e) {}
+    _renderRosterData(el, pers);
   }
+}
+
+function _renderRosterData(el, pers) {
+  if (!pers.length) { el.innerHTML = '<div style="text-align:center;padding:3rem;color:#8a7a5a">Henüz personel kaydı yok.</div>'; return; }
   var groups = {};
-  pers.forEach(function(p) {
-    if (!groups[p.rank]) groups[p.rank] = [];
-    groups[p.rank].push(p);
-  });
+  pers.forEach(function(p) { if (!groups[p.rank]) groups[p.rank] = []; groups[p.rank].push(p); });
   var html = '';
   RANK_ORDER.forEach(function(rank) {
-    var list = groups[rank];
-    if (!list || !list.length) return;
+    var list = groups[rank]; if (!list || !list.length) return;
     var isTop = (rank === 'Sheriff' || rank === 'Under Sheriff' || rank === 'Captain');
     var gridClass = isTop ? 'slots-grid slots-center-3' : 'slots-grid';
     html += '<div class="roster-section"><div class="rank-header"><div class="rank-title">' + rank.toUpperCase() + '</div><div class="rank-sub">' + (RANK_SUBS[rank] || 'Aktif Kadro') + '</div></div><div class="' + gridClass + '">';
@@ -56,28 +57,10 @@ function renderRoster() {
       var badgeCls  = isCadet ? 'slot-badge-num cadet-num' : 'slot-badge-num';
       var nameCls   = isCadet ? 'slot-name cadet-name' : 'slot-name';
       var adminBadge = p.isAdmin ? '<div style="position:absolute;top:-6px;right:-6px;background:#cc4444;color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:1px">ADMİN</div>' : '';
-
-      /* Personel fotoğrafı varsa göster */
-      var avatarContent;
-      if (p.photo) {
-        avatarContent = '<img src="' + p.photo + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-      } else {
-        avatarContent = '<span class="' + initCls + '">' + initials + '</span>';
-      }
-
-      html += '<div class="slot">' +
-        '<div class="' + avatarCls + '" style="position:relative">' +
-          adminBadge + avatarContent +
-          '<div class="' + badgeCls + '">' + (p.badge || '#----') + '</div>' +
-        '</div>' +
-        '<div class="' + nameCls + '">' + p.name + '</div>' +
-        '<div class="slot-online">' +
-          (p.online
-            ? '<div class="dot-on"></div><span class="online-text">Çevrimiçi</span>'
-            : '<div class="dot-off"></div><span class="offline-text">Çevrimdışı</span>') +
-        '</div>' +
-        '<div style="font-size:10px;color:#8a7a5a;margin-top:3px">' + (p.unit || '') + '</div>' +
-      '</div>';
+      var avatarContent = p.photo
+        ? '<img src="' + p.photo + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'
+        : '<span class="' + initCls + '">' + initials + '</span>';
+      html += '<div class="slot"><div class="' + avatarCls + '" style="position:relative">' + adminBadge + avatarContent + '<div class="' + badgeCls + '">' + (p.badge || '#----') + '</div></div><div class="' + nameCls + '">' + p.name + '</div><div class="slot-online">' + (p.online ? '<div class="dot-on"></div><span class="online-text">Çevrimiçi</span>' : '<div class="dot-off"></div><span class="offline-text">Çevrimdışı</span>') + '</div><div style="font-size:10px;color:#8a7a5a;margin-top:3px">' + (p.unit || '') + '</div></div>';
     });
     html += '</div></div>';
   });
@@ -88,21 +71,24 @@ function renderRoster() {
 function renderGalleryPage() {
   var el = document.getElementById('gallery-content');
   if (!el) return;
-  var photos = [];
-  try { photos = JSON.parse(localStorage.getItem('bcso2_gallery') || '[]'); } catch(e) {}
-  if (!photos.length) {
-    el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted);grid-column:1/-1">Henüz galeri fotoğrafı eklenmemiş.</div>';
-    return;
+  el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted);grid-column:1/-1">Yükleniyor...</div>';
+  if (typeof window.getGallery === 'function') {
+    window.getGallery().then(function(photos) { _renderGalleryData(el, photos); });
+  } else {
+    var photos = []; try { photos = JSON.parse(localStorage.getItem('bcso2_gallery') || '[]'); } catch(e) {}
+    _renderGalleryData(el, photos);
   }
-  el.innerHTML = photos.slice().reverse().map(function(p) {
+}
+
+function _renderGalleryData(el, photos) {
+  if (!photos.length) { el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted);grid-column:1/-1">Henüz galeri fotoğrafı eklenmemiş.</div>'; return; }
+  photos.sort(function(a,b){ return b.id-a.id; });
+  el.innerHTML = photos.map(function(p) {
     return '<div class="gallery-item" onclick="openLightbox(\'' + p.url + '\')">' +
       '<img src="' + p.url + '" alt="' + (p.title||'') + '" loading="lazy" onerror="this.parentElement.style.display=\'none\'">' +
-      '<div class="gallery-caption">' +
-        '<div class="gallery-caption-title">' + (p.title||'') + '</div>' +
-        (p.desc ? '<div class="gallery-caption-desc">' + p.desc + '</div>' : '') +
-        '<div style="font-size:10px;color:var(--muted);margin-top:4px">' + (p.author||'') + ' · ' + (p.date||'') + '</div>' +
-      '</div>' +
-    '</div>';
+      '<div class="gallery-caption"><div class="gallery-caption-title">' + (p.title||'') + '</div>' +
+      (p.desc ? '<div class="gallery-caption-desc">' + p.desc + '</div>' : '') +
+      '<div style="font-size:10px;color:var(--muted);margin-top:4px">' + (p.author||'') + ' · ' + (p.date||'') + '</div></div></div>';
   }).join('');
 }
 
@@ -118,22 +104,27 @@ function openLightbox(url) {
 function renderHQPage() {
   var el = document.getElementById('hq-content');
   if (!el) return;
-  var posts = [];
-  try { posts = JSON.parse(localStorage.getItem('bcso2_hq') || '[]'); } catch(e) {}
-  if (!posts.length) {
-    el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted)">Henüz haber yayınlanmamış.</div>';
-    return;
+  el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted)">Yükleniyor...</div>';
+  if (typeof window.getHQPosts === 'function') {
+    window.getHQPosts().then(function(posts) { _renderHQData(el, posts); });
+  } else {
+    var posts = []; try { posts = JSON.parse(localStorage.getItem('bcso2_hq') || '[]'); } catch(e) {}
+    _renderHQData(el, posts);
   }
+}
+
+function _renderHQData(el, posts) {
+  if (!posts.length) { el.innerHTML = '<div style="text-align:center;padding:4rem;color:var(--muted)">Henüz haber yayınlanmamış.</div>'; return; }
   var typeIcons  = { haber:'📰', afis:'🖼️', duyuru:'📢', operasyon:'🚔' };
   var typeLabels = { haber:'Haber', afis:'Afiş', duyuru:'Duyuru', operasyon:'Operasyon Raporu' };
-  var cards = posts.slice().reverse().map(function(p) {
+  posts.sort(function(a,b){ return b.id-a.id; });
+  var cards = posts.map(function(p) {
     var imgHtml = p.imgUrl
       ? '<div class="hq-post-img" onclick="openLightbox(\'' + p.imgUrl.replace(/'/g,"\\'") + '\')">' +
           '<img src="' + p.imgUrl + '" alt="' + p.title + '" onerror="this.parentElement.style.display=\'none\'">' +
         '</div>'
       : '';
-    return '<div class="hq-post">' +
-      imgHtml +
+    return '<div class="hq-post">' + imgHtml +
       '<div class="hq-post-body">' +
         '<div class="hq-post-header">' +
           '<span class="hq-type-badge">' + (typeIcons[p.type]||'📌') + ' ' + (typeLabels[p.type]||p.type) + '</span>' +
@@ -142,8 +133,7 @@ function renderHQPage() {
         '<div class="hq-post-title">' + p.title + '</div>' +
         '<div class="hq-post-content">' + p.content.replace(/\n/g,' ') + '</div>' +
         '<div class="hq-post-footer">🖊 ' + (p.author||'Komuta') + '</div>' +
-      '</div>' +
-    '</div>';
+      '</div></div>';
   }).join('');
   el.innerHTML = '<div class="hq-grid">' + cards + '</div>';
 }

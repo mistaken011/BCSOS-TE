@@ -18,12 +18,15 @@ function showPage(id, btn) {
 }
 
 /* Rütbe sırası (yüksekten düşüğe) */
-var RANK_ORDER = ['Sheriff','Under Sheriff','Captain','Lieutenant','Sergeant II','Sergeant I','Corporal','Deputy','Cadet'];
+var RANK_ORDER = ['Captain','Lieutenant','Sergeant','Sheriff Deputy Bonus III','Sheriff Deputy Bonus II','Sheriff Deputy I','Sheriff Deputy','Cadet'];
 var RANK_SUBS  = {
-  'Sheriff':'Komuta Birimi', 'Under Sheriff':'Komuta Birimi',
-  'Captain':'Üst Komuta', 'Lieutenant':'Orta Komuta',
-  'Sergeant II':'Aktif Kadro', 'Sergeant I':'Aktif Kadro',
-  'Corporal':'Aktif Kadro', 'Deputy':'Aktif Kadro',
+  'Captain':'Komuta Birimi',
+  'Lieutenant':'Orta Komuta',
+  'Sergeant':'Aktif Kadro',
+  'Sheriff Deputy Bonus III':'Aktif Kadro',
+  'Sheriff Deputy Bonus II':'Aktif Kadro',
+  'Sheriff Deputy I':'Aktif Kadro',
+  'Sheriff Deputy':'Aktif Kadro',
   'Cadet':'Stajyer Personel'
 };
 
@@ -46,7 +49,7 @@ function _renderRosterData(el, pers) {
   var html = '';
   RANK_ORDER.forEach(function(rank) {
     var list = groups[rank]; if (!list || !list.length) return;
-    var isTop = (rank === 'Sheriff' || rank === 'Under Sheriff' || rank === 'Captain');
+    var isTop = (rank === 'Captain' || rank === 'Lieutenant');
     var gridClass = isTop ? 'slots-grid slots-center-3' : 'slots-grid';
     html += '<div class="roster-section"><div class="rank-header"><div class="rank-title">' + rank.toUpperCase() + '</div><div class="rank-sub">' + (RANK_SUBS[rank] || 'Aktif Kadro') + '</div></div><div class="' + gridClass + '">';
     list.forEach(function(p) {
